@@ -1,6 +1,6 @@
 let bubbles = [];
-let letters = ['2','3','4','5','A','C','J','Z','R','W'];
-let colors = ['#ee352e','#ee352e','#00933c','#00933c','#2850ad','#2850ad','#996633','#996633','#fccc0a','#fccc0a']
+let letters = ['2', '3', '4', '5', 'A', 'C', 'J', 'Z', 'R', 'W'];
+let colors = ['#ee352e', '#ee352e', '#00933c', '#00933c', '#2850ad', '#2850ad', '#996633', '#996633', '#fccc0a', '#fccc0a']
 let mouse = {
   x: -1,
   y: -1,
@@ -14,10 +14,10 @@ let testBubble = {
 let maxBubbles = 8;
 
 function setup() {
-  createCanvas(min(windowWidth,windowHeight), min(windowWidth,windowHeight));
+  createCanvas(min(windowWidth, windowHeight), min(windowWidth, windowHeight));
   noStroke();
   for (var i = 0; i < letters.length; i++) {
-    bubbles.push(new Bubble(random(width), random(height), letters[i], color(colors[i]),1));
+    bubbles.push(new Bubble(random(width), random(height), letters[i], color(colors[i]), 1));
   }
 }
 
@@ -29,18 +29,25 @@ function draw() {
   for (let i = bubbles.length - 1; i >= 0; i--) {
     if (!bubbles[i].touchingAny()) {
       bubbles[i].grow();
+    } else {
+      bubbles[i].jitter(4);
     }
-    bubbles[i].jitter(3);
+    if (!bubbles[i].touchingAny()) {
+      bubbles[i].grow();
+    }
     bubbles[i].show();
   }
 }
-function touchStarted(){
+
+function touchStarted() {
   popBubbles();
 }
-function touchMoved(){
+
+function touchMoved() {
   popBubbles();
   return false;
 }
+
 function popBubbles() {
   mouse.x = mouseX;
   mouse.y = mouseY;
