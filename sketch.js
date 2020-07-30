@@ -26,10 +26,7 @@ function draw() {
     if (!bubbles[i].touchingAny()) {
       bubbles[i].grow();
     } else {
-      bubbles[i].jitter(4);
-    }
-    if (!bubbles[i].touchingAny()) {
-      bubbles[i].grow();
+      bubbles[i].jitter(3);
     }
     bubbles[i].show();
   }
